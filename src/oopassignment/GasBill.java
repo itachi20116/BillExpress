@@ -65,7 +65,7 @@ public class GasBill {
         calServiceCharge();
         calUsageCharge();
         this.billTotal = this.usageCharge + this.serviceCharge;
-        this.closeBalance = this.openBalance = this.billTotal;
+        this.closeBalance = this.openBalance + this.billTotal;
     }
 
     public void calServiceCharge() {
@@ -78,7 +78,7 @@ public class GasBill {
         } else {
             if (this.usage > 500) {
                 this.overUse = this.usage - 500;
-                this.usageCharge = this.overUse * this.overUseChargeRate + this.usage * this.chargeRate;
+                this.usageCharge = this.overUse * this.overUseChargeRate + 500 * this.chargeRate;
             } else {
                 this.usageCharge = this.usage * this.chargeRate;
             }

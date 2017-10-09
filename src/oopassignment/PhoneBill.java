@@ -110,7 +110,7 @@ public class PhoneBill {
         calMobileCallCharge();
         calNetworkFeatureCharge();
         this.billTotal = this.localCallCharge + this.longDistanceCallCharge + mobileCallCharge + networkFeatureCharge;
-    this.closeBalance = this.openBalance = this.billTotal;
+        this.closeBalance = this.openBalance + this.billTotal;
     }
 
     public boolean makePayment(double payment) {

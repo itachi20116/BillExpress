@@ -3,7 +3,7 @@ package oopassignment;
 public class WaterBill {
 
     private int datePeriod;
-
+    private boolean isDrought;
     private double usage;
     private final String billType = "Water Bill";
     private double billTotal;
@@ -24,6 +24,18 @@ public class WaterBill {
 
     public void setBalance(double balanceBF) {
         this.openBalance = balanceBF;
+    }
+
+    public boolean setDrought(String YN) {
+        if ("y".equals(YN.toLowerCase())) {
+            this.isDrought = true;
+            return false;
+        } else if ("n".equals(YN.toLowerCase())) {
+            this.isDrought = false;
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public boolean setPeriod(int date) {
@@ -63,13 +75,18 @@ public class WaterBill {
     }
 
     public void calBillTotal() {
-        if (this.usage > this.limit) {
-            this.overUse = this.usage - this.limit;
-            this.billTotal = usage * this.chargeRate + this.overUse / 10.0 * 3;
-            this.closeBalance = this.openBalance = this.billTotal;
-        } else {
+        if (!this.isDrought) {
             this.billTotal = usage * this.chargeRate;
-            this.closeBalance = this.openBalance = this.billTotal;
+            this.closeBalance = this.openBalance + this.billTotal;
+        } else {
+            if (this.usage > this.limit) {
+                this.overUse = this.usage - this.limit;
+                this.billTotal = usage * this.chargeRate + this.overUse / 10.0 * 3;
+                this.closeBalance = this.openBalance = this.billTotal;
+            } else {
+                this.billTotal = usage * this.chargeRate;
+                this.closeBalance = this.openBalance + this.billTotal;
+            }
         }
     }
 

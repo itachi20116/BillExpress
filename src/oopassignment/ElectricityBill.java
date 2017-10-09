@@ -92,7 +92,7 @@ public class ElectricityBill {
         calcServiceCharge();
         calcUsageCharge();
         this.billTotal = this.serviceCharge + this.usageCharge;
-        this.closeBalance = this.openBalance = this.billTotal;
+        this.closeBalance = this.openBalance + this.billTotal;
     }
 
     public boolean makePayment(double payment) {

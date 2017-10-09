@@ -632,6 +632,7 @@ public class BillExpress {
         double usage;
         int date;
         int type;
+        String isDrought;
         WaterBill current, previous;
         CustomerAccount customer;
 
@@ -664,6 +665,13 @@ public class BillExpress {
                 System.out.println("Only accept [1] or [2] : ");
                 type = checkInputInteger(buffer.readLine());
             }
+        }
+        System.out.println("Is drought period? : [Y/N] ");
+        isDrought = buffer.readLine();
+        while (current.setDrought(isDrought)) {
+            System.out.println("Wrong Input!");
+            System.out.println("Only Accept [y] or [n]");
+            isDrought = buffer.readLine();
         }
         System.out.println("Input the Water Used in kL: ");
         usage = checkInputDouble(buffer.readLine());
